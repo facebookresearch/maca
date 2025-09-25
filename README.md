@@ -84,6 +84,8 @@ See `args.py` for complete argument documentation.
 
 ## Citation
 
+This work was developed at Meta AI, Meta Superintelligence Labs, and the LIINC Lab at Columbia University.
+
 If you use this framework in your research, please cite:
 
 ```bibtex
@@ -94,7 +96,6 @@ If you use this framework in your research, please cite:
   eprint={2509.15172},
   archivePrefix={arXiv},
   primaryClass={cs.AI},
-  url={https://doi.org/10.48550/arXiv.2509.15172},
-  note={¹Meta AI, ²Meta Superintelligence Labs, ³Columbia University. *Work done at Meta, †Joint last author, alphabetical order}
+  url={https://doi.org/10.48550/arXiv.2509.15172}
 }
 ```
