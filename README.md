@@ -19,18 +19,21 @@ MACA trains language models to be more consistent reasoners through multi-agent 
 ### Installation
 
 ```bash
-conda 
+conda create -n maca python=3.12
+conda activate maca
 pip install -r requirements.txt
+pip install -e .
 ```
 
-### Basic Training
+### Multi-Agent Training
 
 ```bash
-python main.py \
-  --model qwen2b \
-  --dataset gsm8k \
-  --agents 3 \
-  --use_consensus_reward \
+python main.py --model qwen2b --dataset gsm8k --gpus_per_model 1 --max_concurrent_tasks 4 --train_size 1500 --test_size 500 --lora_r 128 --lora_alpha 128 --dpo --epoch_dpo 3 --batch_dpo 6 --lr_dpo 1e-5 --beta_dpo 0.1 --gradient_accumulation_steps_dpo 4 --seed 1
+```
+
+### Single-Agent Training
+```bash
+python maca_single_agent.py --output_dir q2b_sa_runs --model qwen2b --phase kto --kto --train_datasets math gsm8k mathqa --test_datasets math gsm8k mathqa svamp gpqa csqa --use_full_test --lora_r_range 64 --lora_alpha_range 64 --lr_kto 1e-5 --evaluation_batch_size 24
 ```
 
 ### Key Arguments
@@ -76,11 +79,6 @@ Built on **Hugging Face TRL**, supports multiple paradigms with majority vote va
 - **MV-SFT**: Supervised fine-tuning on consensus examples
 - **MV-GRPO**: Reinforcement learning with consensus rewards  
 - **MV-KTO/DPO**: Preference optimization methods
-
-## Analysis Tools
-
-- Debate performance tracking and visualization
-- Self-consistency, Pass@K, and MV@T evaluation
 
 See `args.py` for complete argument documentation.
 
