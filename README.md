@@ -84,7 +84,7 @@ See `args.py` for complete argument documentation.
 
 ## Citation
 
-This work was developed at Meta AI, Meta Superintelligence Labs, and the LIINC Lab at Columbia University.
+This work was developed at Meta AI in collaboration with Meta Superintelligence Labs and the LIINC Lab at Columbia University.
 
 If you use this framework in your research, please cite:
 
