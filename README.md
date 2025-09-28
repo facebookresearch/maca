@@ -39,17 +39,14 @@ python maca_single_agent.py --output_dir q2b_sa_runs --model qwen2b --phase kto 
 
 ### Key Arguments
 
-- `--model`: Base model to use (mistral7b, llama1b/3b/8b, phi4b, qwen2b/7b, gemma4b)
-- `--dataset`: Training dataset (gsm8k, math, gpqa, svamp, mathqa, csqa, arithmatic, aime_amc)
+- `--model`: Quantized base model to use (llama1b/3b/8b, phi4b, qwen2b/7b, gemma4b, mistral7b)
+- `--dataset`: Dataset (gsm8k, math, mathqa, gpqa, svamp, csqa)
 - `--agents`: Number of agents in the debate (default: 3)
-- `--iterations`: Training iterations (default: 1)
-- `--finetune`: Enable supervised fine-tuning (SFT)
-- `--post_train`: Enable reinforcement learning post-training (GRPO)
-- `--dpo`: Enable Direct Preference Optimization training
-- `--kto`: Enable Kahneman-Tversky Optimization training
+- `--finetune`: Enable Majority Vote Supervised Fine-Tuning (SFT)
+- `--post_train`: Enable Majority Vote Group-Relative Policy Optimization training (GRPO)
+- `--dpo`: Enable Majority Vote Direct Preference Optimization training
+- `--kto`: Enable Majority Vote Kahneman-Tversky Optimization training
 - `--use_consensus_reward`: Enable consensus-based rewards
-- `--use_quantization`: Enable model quantization for memory efficiency
-- `--use_scheduler`: Enable intelligent adapter scheduling (recommended)'
 
 ### Wandb logging
 
