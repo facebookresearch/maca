@@ -220,6 +220,9 @@ class MinimalOrchestrator:
                 reinit=True,
                 settings=wandb.Settings(start_method="thread", console="off")
             )
+        else:
+            # Disable wandb entirely for HuggingFace auto-initialization
+            os.environ['WANDB_DISABLED'] = 'true'
         
         # Initialize the agent
         agent = Agent(

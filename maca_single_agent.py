@@ -519,6 +519,8 @@ def setup_wandb_hp_tuning(
     # Skip wandb for test cases
     if config.get('entity_name') == 'test-entity':
         print("Skipping wandb initialization for test case")
+        import os
+        os.environ['WANDB_DISABLED'] = 'true'
         return None
 
     # Create a unique group name for this HP tuning session
