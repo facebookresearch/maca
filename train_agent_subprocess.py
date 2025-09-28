@@ -184,6 +184,7 @@ class MinimalOrchestrator:
         from data import prepare_finetune_data, prepare_post_train_data, prepare_kto_data, prepare_dpo_data
         from utils import set_random_seed, cleanup_gpu
         import wandb
+        import os
         
         agent_prefix = f" Agent-{agent_idx}"
         checkpoint_path = f"{self.config['experiment_dir']}/checkpoints/agent_{agent_idx}"
@@ -197,7 +198,6 @@ class MinimalOrchestrator:
         
         # Initialize wandb for this subprocess (suppress output)
         if self.config.get('entity_name') != 'test-entity':  # Skip for tests
-            import os
             os.environ['WANDB_SILENT'] = 'true'  # Suppress wandb output
             # Re-use the persisted group id so every agent/phase stays under
             # the same WandB umbrella created by the orchestrator.
