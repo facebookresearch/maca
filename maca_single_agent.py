@@ -516,9 +516,14 @@ def setup_wandb_hp_tuning(
     phase: str
 ):
     """Set up WandB for hyperparameter tuning session."""
+    # Skip wandb for test cases
+    if config.get('entity_name') == 'test-entity':
+        print("Skipping wandb initialization for test case")
+        return None
+
     # Create a unique group name for this HP tuning session
     group_name = f"hp_tuning_{int(time.time())}"
-    
+
     # Initialize WandB
     wandb.init(
         project=config.get('project_name', 'llm-marl'),
@@ -1081,6 +1086,7 @@ def main():
     parser.add_argument('--judge_batch_size', type=int, default=4, help="Judge batch size")
     
     # Logging parameters
+    parser.add_argument('--wandb', action='store_true', help="Enable Weights & Biases logging")
     parser.add_argument('--project_name', default='llm-marl', help="Project name")
     parser.add_argument('--entity_name', default='llm-marl', help="Entity name")
     parser.add_argument('--tmp', action='store_true', help="Temporary mode")
@@ -1198,7 +1204,12 @@ def main():
     if args.no_context:
         args.include_debate_context = False
         print("Note: --no_context flag detected, setting include_debate_context=False")
-    
+
+    # Handle wandb flag override
+    if not args.wandb:
+        args.entity_name = "test-entity"
+        print("Note: --wandb flag not set, disabling wandb logging")
+
     # Resolve training datasets to debate files (supports single and multi)
     train_datasets = args.train_datasets if args.train_datasets else [args.dataset]
     train_dataset_to_file: Dict[str, str] = {}

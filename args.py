@@ -139,6 +139,8 @@ def parse_args() -> argparse.Namespace:
                        help="Batch size for judge model evaluations")
     
     # ===== Logging and experiment tracking =====
+    parser.add_argument('--wandb', action='store_true', dest="wandb",
+                       help="Enable Weights & Biases logging")
     parser.add_argument('--project_name', action='store', default="llm-marl", type=str, dest="project_name",
                        help="Project name for Weights & Biases logging")
     parser.add_argument('--entity_name', action='store', default="llm-marl", type=str, dest="entity_name",
@@ -227,5 +229,10 @@ def parse_args() -> argparse.Namespace:
     if args.no_context:
         args.include_debate_context = False
         print("Note: --no_context flag detected, setting include_debate_context=False")
+
+    # Handle wandb flag override
+    if not args.wandb:
+        args.entity_name = "test-entity"
+        print("Note: --wandb flag not set, disabling wandb logging")
 
     return args
