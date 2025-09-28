@@ -32,6 +32,7 @@ python main.py --model qwen2b --dataset gsm8k --gpus_per_model 1 --max_concurren
 ```
 
 ### Single-Agent Training
+
 ```bash
 python maca_single_agent.py --output_dir q2b_sa_runs --model qwen2b --phase kto --kto --train_datasets math gsm8k mathqa --test_datasets math gsm8k mathqa svamp gpqa csqa --use_full_test --lora_r_range 64 --lora_alpha_range 64 --lr_kto 1e-5 --evaluation_batch_size 24
 ```
@@ -48,7 +49,13 @@ python maca_single_agent.py --output_dir q2b_sa_runs --model qwen2b --phase kto 
 - `--kto`: Enable Kahneman-Tversky Optimization training
 - `--use_consensus_reward`: Enable consensus-based rewards
 - `--use_quantization`: Enable model quantization for memory efficiency
-- `--use_scheduler`: Enable intelligent adapter scheduling (recommended)
+- `--use_scheduler`: Enable intelligent adapter scheduling (recommended)'
+
+### Wandb logging
+
+- `--wandb`: Enable Weights & Biases logging
+- `--project_name`: W&B project name (default: llm-marl, requires setting --wandb)
+- `--entity_name`: W&B entity/team name (default: llm-marl, requires setting --wandb)
 
 ## Project Structure
 
@@ -65,9 +72,8 @@ maca/
 ├── utils.py                   # Utility functions and helpers
 ├── scheduler.py               # Dynamic job scheduling for adapters
 ├── train_agent_subprocess.py  # Subprocess training management
-├── analyze_experiment_performance.py  # Performance analysis tools
-├── read_debate_performance.py # Debate results analysis
-├── analysis/                  # Additional analysis scripts
+├── analyze_experiment_performance.py  # Debate results analysis
+├── read_debate_performance.py # Read debate utils
 ├── data/                      # Dataset storage and splits
 ├── experiments/               # Experiment outputs and results
 └── checkpoints/              # Model checkpoints and adapters
